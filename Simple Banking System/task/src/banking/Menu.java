@@ -16,6 +16,7 @@ public class Menu {
             printMainMenu();
             try {
                 userInput = Integer.parseInt(scanner.nextLine().trim());
+                System.out.println(); //empty line
                 switch (userInput) {
                     case 1: {
                         bankAccount.createAccount();
@@ -40,7 +41,7 @@ public class Menu {
     }
 
     void printMainMenu() {
-        System.out.println("1. Create an account");
+        System.out.println("\n1. Create an account");
         System.out.println("2. Log into account");
         System.out.println("0. Exit");
     }
