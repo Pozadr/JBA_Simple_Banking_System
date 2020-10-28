@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Menu {
     Scanner scanner = new Scanner(System.in);
-    BankAccount bankAccount;
+    Bank bank;
 
-    public Menu(BankAccount bankAccount) {
-        this.bankAccount = bankAccount;
+    public Menu(Bank bank) {
+        this.bank = bank;
     }
 
     public void run() {
@@ -19,17 +19,43 @@ public class Menu {
                 System.out.println(); //empty line
                 switch (userInput) {
                     case 1: {
-                        bankAccount.createAccount();
+                        bank.createAccount();
                         break;
                     }
                     case 2: {
-                        if (bankAccount.loginAccount()) {
-                            printUserMenu();
+                        if (bank.loginAccount()) {
+                            int userMenuInput = Integer.MAX_VALUE;
+                            do {
+                                printUserMenu();
+                                userMenuInput = Integer.parseInt(scanner.nextLine().trim());
+                                switch (userMenuInput) {
+                                    case 1: {
+                                        bank.getAccounts();
+                                        break;
+                                    }
+                                    case 2: {
+
+                                        break;
+                                    }
+                                    case 0: {
+                                        break;
+                                    }
+                                    default: {
+                                        System.out.println("Wrong number! Try again!");
+                                    }
+                                }
+
+                            } while (userMenuInput != 0);
                         }
                         break;
                     }
                     case 0: {
                         System.out.println("Bye!");
+                        break;
+                    }
+                    // testing
+                    case 3: {
+                        bank.getAccounts();
                         break;
                     }
                     default: {

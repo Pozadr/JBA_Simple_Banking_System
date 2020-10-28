@@ -1,11 +1,11 @@
 package banking;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class BankAccount {
     private int[] accountNumber = new int[16];
     private int[] pin = new int[4];
+    private int balance = 0;
     /**
      * Whole card number 16-digit length.
      * IIN must be 400000.
@@ -14,47 +14,24 @@ public class BankAccount {
      * X - raandom number
      * C - checksum
      */
-    public void createAccount() {
+    public BankAccount() {
         setAccountNumber();
         setPin();
-        getAccountData();
-    }
-
-    public boolean loginAccount() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your card number:");
-        String[] userCardNumberInput = scanner.nextLine().trim().split("");
-        System.out.println("Enter your PIN:");
-        String[] userPinInput = scanner.nextLine().trim().split("");
-        if (userCardNumberInput.length != accountNumber.length || userPinInput.length != pin.length) {
-            System.out.println("Wrong card number or PIN!");
-            return false;
-        } else {
-            // check account number
-            for (int i = 0; i < accountNumber.length; i++) {
-                if (accountNumber[i] != Integer.parseInt(userCardNumberInput[i])) {
-                    System.out.println("Wrong card number or PIN!");
-                    return false;
-                }
-            }
-            // check pin number
-            for (int i = 0; i < pin.length; i++) {
-                if (pin[i] != Integer.parseInt(userPinInput[i])) {
-                    System.out.println("Wrong card number or PIN!");
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void getAccountData() {
         System.out.println("Your card has been created");
+        getAccountInfo();
+    }
+
+
+    public void getAccountInfo() {
         System.out.println("Your card number:");
         System.out.println(getAccountNumberString());
         System.out.println("Your card PIN:");
         System.out.println(getPinString());
+    }
 
+
+    public int[] getAccountNumber() {
+        return accountNumber;
     }
 
 
@@ -64,6 +41,11 @@ public class BankAccount {
             sb.append(num);
         }
         return sb.toString();
+    }
+
+
+    public int[] getPin() {
+        return pin;
     }
 
 
@@ -94,5 +76,9 @@ public class BankAccount {
         for (int i = 0; i < pin.length; i++) {
            pin[i] = random.nextInt(9);
         }
+    }
+
+    public void getBalance() {
+        System.out.println("Balance: " + balance);
     }
 }
