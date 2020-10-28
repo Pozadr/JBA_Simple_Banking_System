@@ -23,7 +23,9 @@ public class Menu {
                         break;
                     }
                     case 2: {
-                        System.out.println("Log into");
+                        if (bankAccount.loginAccount()) {
+                            printUserMenu();
+                        }
                         break;
                     }
                     case 0: {
@@ -47,8 +49,8 @@ public class Menu {
     }
 
     void printUserMenu() {
-        System.out.println("1. Create an account");
-        System.out.println("2. Log into account");
+        System.out.println("\n1. Balance");
+        System.out.println("2. Log out");
         System.out.println("0. Exit");
     }
 }

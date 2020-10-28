@@ -1,6 +1,7 @@
 package banking;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class BankAccount {
     private int[] accountNumber = new int[16];
@@ -17,6 +18,34 @@ public class BankAccount {
         setAccountNumber();
         setPin();
         getAccountData();
+    }
+
+    public boolean loginAccount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your card number:");
+        String[] userCardNumberInput = scanner.nextLine().trim().split("");
+        System.out.println("Enter your PIN:");
+        String[] userPinInput = scanner.nextLine().trim().split("");
+        if (userCardNumberInput.length != accountNumber.length || userPinInput.length != pin.length) {
+            System.out.println("Wrong card number or PIN!");
+            return false;
+        } else {
+            // check account number
+            for (int i = 0; i < accountNumber.length; i++) {
+                if (accountNumber[i] != Integer.parseInt(userCardNumberInput[i])) {
+                    System.out.println("Wrong card number or PIN!");
+                    return false;
+                }
+            }
+            // check pin number
+            for (int i = 0; i < pin.length; i++) {
+                if (pin[i] != Integer.parseInt(userPinInput[i])) {
+                    System.out.println("Wrong card number or PIN!");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void getAccountData() {
