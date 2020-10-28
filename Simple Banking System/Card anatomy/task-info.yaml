@@ -250,5 +250,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/515/implement
-status: Unchecked
+status: Failed
+feedback:
+  message: Execution failed
+  time: Wed, 28 Oct 2020 19:02:33 UTC
 record: -1

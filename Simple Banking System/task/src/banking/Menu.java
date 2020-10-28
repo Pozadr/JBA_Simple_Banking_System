@@ -24,17 +24,17 @@ public class Menu {
                     }
                     case 2: {
                         if (bank.loginAccount()) {
-                            int userMenuInput = Integer.MAX_VALUE;
+                            int userMenuInput;
                             do {
                                 printUserMenu();
                                 userMenuInput = Integer.parseInt(scanner.nextLine().trim());
                                 switch (userMenuInput) {
                                     case 1: {
-                                        bank.getAccounts();
+                                        bank.getLoggedInBalance();
                                         break;
                                     }
                                     case 2: {
-
+                                        bank.resetLoggedIn();
                                         break;
                                     }
                                     case 0: {
@@ -44,18 +44,12 @@ public class Menu {
                                         System.out.println("Wrong number! Try again!");
                                     }
                                 }
-
-                            } while (userMenuInput != 0);
+                            } while (userMenuInput != 0 && userMenuInput != 2);
                         }
                         break;
                     }
                     case 0: {
                         System.out.println("Bye!");
-                        break;
-                    }
-                    // testing
-                    case 3: {
-                        bank.getAccounts();
                         break;
                     }
                     default: {

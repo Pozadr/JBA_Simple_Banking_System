@@ -6,15 +6,44 @@ import java.util.Scanner;
 
 public class Bank {
     List<BankAccount> bankAccounts = new ArrayList<>();
-    BankAccount loggedInAccount;
+    BankAccount loggedInAccount = null;
+
 
     public void createAccount() {
         bankAccounts.add(new BankAccount());
     }
 
 
+    private void setLoggedIn(BankAccount loggedIn) {
+        this.loggedInAccount = loggedIn;
+    }
+
+    public void resetLoggedIn() {
+        this.loggedInAccount = null;
+        System.out.println("You have successfully logged out!\n");
+    }
+
+
+    public void getAccounts() {
+        for (BankAccount account : bankAccounts) {
+            account.getAccountInfo();
+        }
+    }
+
+    public void getLoggedInBalance() {
+        loggedInAccount.getBalance();
+    }
+
+
+
     public boolean loginAccount() {
-        // load data fromm user
+        // if user not logged out before
+        if (loggedInAccount != null) {
+            System.out.println("You have successfully logged in!\n");
+            return true;
+        }
+
+        // load data from user
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your card number:");
         String[] userCardNumberInput = scanner.nextLine().trim().split("");
@@ -23,6 +52,7 @@ public class Bank {
 
         // if account number is too short or pin number is too short return false
         if (userCardNumberInput.length != 16 || userPinInput.length != 4) {
+            System.out.println("Wrong card number or PIN!");
             return false;
         }
 
@@ -48,22 +78,12 @@ public class Bank {
                 // account found
                 if (pinOk) {
                     setLoggedIn(account);
-                    account.getAccountInfo();
+                    System.out.println("You have successfully logged in!\n");
                     return true;
                 }
             }
         }
         System.out.println("Wrong card number or PIN!");
         return false;
-    }
-
-    public void setLoggedIn(BankAccount loggedIn) {
-        this.loggedInAccount = loggedIn;
-    }
-
-    public void getAccounts() {
-        for (BankAccount account : bankAccounts) {
-            account.getAccountInfo();
-        }
     }
 }
