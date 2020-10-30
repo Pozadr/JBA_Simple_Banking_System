@@ -250,8 +250,9 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/93/stages/515/implement
-status: Failed
+status: Solved
 feedback:
-  message: Execution failed
-  time: Wed, 28 Oct 2020 19:02:33 UTC
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/93/stages/515/implement">JetBrains
+    Academy</a>
+  time: Fri, 30 Oct 2020 13:51:26 UTC
 record: -1

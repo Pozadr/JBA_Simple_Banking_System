@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Bank {
     List<BankAccount> bankAccounts = new ArrayList<>();
-    BankAccount loggedInAccount = null;
+    //BankAccount loggedInAccount;
+    boolean isLoggedIn = false;
 
 
     public void createAccount() {
@@ -14,12 +15,14 @@ public class Bank {
     }
 
 
+    /*
     private void setLoggedIn(BankAccount loggedIn) {
         this.loggedInAccount = loggedIn;
     }
+     */
 
     public void resetLoggedIn() {
-        this.loggedInAccount = null;
+        isLoggedIn = false;
         System.out.println("You have successfully logged out!\n");
     }
 
@@ -30,25 +33,24 @@ public class Bank {
         }
     }
 
+
     public void getLoggedInBalance() {
-        loggedInAccount.getBalance();
+        System.out.println("Balance: 0\n");
+        //loggedInAccount.getBalance();
     }
 
 
-
     public boolean loginAccount() {
-        // if user not logged out before
-        if (loggedInAccount != null) {
-            System.out.println("You have successfully logged in!\n");
-            return true;
-        }
-
         // load data from user
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter your card number:");
-        String[] userCardNumberInput = scanner.nextLine().trim().split("");
+        String inputCard = scanner.nextLine().trim();
+        String[] userCardNumberInput = inputCard.split(""); //scanner.nextLine().trim().split("");
+
         System.out.println("Enter your PIN:");
-        String[] userPinInput = scanner.nextLine().trim().split("");
+        String inputPin = scanner.nextLine().trim();
+        String[] userPinInput = inputPin.split("");
 
         // if account number is too short or pin number is too short return false
         if (userCardNumberInput.length != 16 || userPinInput.length != 4) {
@@ -57,10 +59,10 @@ public class Bank {
         }
 
         // check in all BankAccounts
-        for(BankAccount account : bankAccounts) {
+        for (BankAccount account : bankAccounts) {
             // check account number
             boolean accOk = true;
-            for (int i = 0; i < account.getAccountNumber().length ; i++) {
+            for (int i = 0; i < account.getAccountNumber().length; i++) {
                 if (account.getAccountNumber()[i] != Integer.parseInt(userCardNumberInput[i])) {
                     accOk = false;
                     break;
@@ -77,7 +79,8 @@ public class Bank {
                 }
                 // account found
                 if (pinOk) {
-                    setLoggedIn(account);
+                    //setLoggedIn(account);
+                    isLoggedIn = true;
                     System.out.println("You have successfully logged in!\n");
                     return true;
                 }

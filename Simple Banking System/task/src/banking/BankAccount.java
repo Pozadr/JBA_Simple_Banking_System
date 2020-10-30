@@ -3,8 +3,8 @@ package banking;
 import java.util.Random;
 
 public class BankAccount {
-    private int[] accountNumber = new int[16];
-    private int[] pin = new int[4];
+    private final int[] accountNumber = new int[16];
+    private final int[] pin = new int[4];
     private int balance = 0;
     /**
      * Whole card number 16-digit length.
@@ -76,6 +76,10 @@ public class BankAccount {
         for (int i = 0; i < pin.length; i++) {
            pin[i] = random.nextInt(9);
         }
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     public void getBalance() {
